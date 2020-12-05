@@ -5,7 +5,8 @@ Las prácticas no consisten en un único proyecto, sino que hay un directorio pa
 
 ## Tecnologías utilizadas en esta asignatura
 
+- Docker & Docker Compose
 - Flask (Python)
 - Django (Python)
-- Bootstrap
+- Bootstrap (CSS)
 - MongoDB
