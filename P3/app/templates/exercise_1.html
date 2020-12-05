@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h1 class="mt-5">Ejercicio 1: Adivina 1-100</h1>
+
+<!--h3 class="mt-5">Introduz</h3-->
+
+{% if num == correct_num %}
+
+<h3 class="mt-5">¡Enhorabuena, has acertado!</h3>
+<h5 class="mt-4">El número secreto era {{ correct_num }}</h5>
+<div class="row ml-auto">
+	<a class="btn btn-info col-auto mr-3 " href="{{ url_for('guess_the_number_game',attempt='0') }}">Volver a jugar</a>
+	<a class="btn btn-danger col-auto" href="{{ url_for('root') }}">Salir</a>
+</div>
+{% elif attempt_num == "10" %}
+
+<h3 class="mt-5">Lo siento, has agotado el número máximo de intentos.</h3>
+<h5 class="mt-4">El número secreto era {{ correct_num }}</h5>
+<div class="row ml-auto">
+<a class="btn btn-info col-auto mr-3 " href="{{ url_for('guess_the_number_game',attempt='0') }}">Volver a jugar</a>
+<a class="btn btn-danger col-auto" href="{{ url_for('root') }}">Salir</a>
+</div>
+
+{% else %}
+
+<form action="{{ url_for('guess_the_number_game',attempt=attempt_num) }}" method="post">
+  <div class="form-group">
+    <label for="number">Introduzca un número del 1 al 100</label>
+    <input type="number" class="form-control" name="number" aria-describedby="emailHelp" placeholder="Introduzca un número" required>
+
+  </div>
+	<div class="form-group">
+  <button type="submit" class="btn btn-info col-auto mr-3 ">Introducir</button>
+	<a class="btn btn-danger col-auto" href="{{ url_for('root') }}">Cancelar</a>
+	</div>
+</form>
+
+{% endif %}
+
+{% endblock %}

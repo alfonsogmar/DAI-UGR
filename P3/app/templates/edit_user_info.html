@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+
+
+{% if user_info_kind == "email" %}
+<h3 class="mt-5 mb-3">Editar correo electrónico</h3>
+<form action="{{ url_for('update_email') }}" method="post">
+  <div class="form-group">
+    <!--label for="new_user_info">Nuevo correo electrónico</label-->
+    <input type="email" class="form-control" id="new_user_info" name="new_user_info" aria-describedby="emailHelp" placeholder="Introduzca nuevo correo" required>
+    <small class="form-text text-muted">Tranquilo, nunca compartiremos su dirección de correo con nadie</small>
+  </div>
+{% else %}
+<h3 class="mt-5 mb-3">Editar nombre completo</h3>
+<form action="{{ url_for('update_fullname') }}" method="post">
+  <div class="form-group">
+    <!--label for="new_user_info">Nuevo nombre completo</label-->
+    <input type="text" class="form-control" id="new_user_info" name="new_user_info" aria-describedby="fullnameHelp" placeholder="Introduzca nuevo nombre" required>
+    <small class="form-text text-muted">Independientemente de tu nombre completo, el nombre usado para identificarte es tu nombre de usuario</small>
+  </div>
+{% endif %}
+	<div class="form-row ml-auto">
+  <button type="submit" class="btn btn-info col-auto mr-3 ">Actualizar</button>
+	<a class="btn btn-danger col-auto" href="{{ url_for('profile') }}">Cancelar</a>
+	</div>
+</form>
+
+{% endblock %}
