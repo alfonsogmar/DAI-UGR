@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-3">Crear nueva entrada</h3>
+
+<p>Introduzca los datos de la nueva entrada, que pretenecerá a la colección <span class="font-weight-bold">{{ collection }}</span>. El identificador (ID) se generará automáticamente.</p>
+
+<form class="" action="{{ url_for('create',collection=collection)}}" method="post">
+	{% for field in fields %}
+	{% if field != '_id'%}
+	<div class="form-group">
+		<label for="{{ field }}">{{ field }}:</label>
+		<input type="text"  class="form-control" name="{{ field }}">
+	</div>
+	{% endif %}
+	{% endfor %}
+	<div class="form-group">
+		<button type="submit" class="btn btn-info col-auto mr-3 ">Crear</button>
+		<a class="btn btn-secondary col-auto" href="{{ url_for('show_collection_table',collection=collection) }}">Volver</a>
+	</div>
+</form>
+
+{% endblock %}

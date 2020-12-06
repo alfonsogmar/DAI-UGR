@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-3">Selección de colección</h3>
+
+<form action="{{ url_for('load_collection') }}" method="post">
+	<div class="form-group">
+		<label for="collection-select">Elija una colección</label>
+		<select class="form-control" name="collection-select">
+			{% for collection in collection_list %}
+			<option value="{{ collection }}">{{ collection }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<input type="submit" class="btn btn-info" value="Aceptar">
+</form>
+
+
+{% endblock %}

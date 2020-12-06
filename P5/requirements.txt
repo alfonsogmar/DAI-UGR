@@ -1,0 +1,4 @@
+flask==1.1
+pymongo
+pickleshare
+Flask-RESTful

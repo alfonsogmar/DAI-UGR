@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+
+<!-- Formulario de búsqueda -->
+<div class="row mt-4">
+	<form class="col-auto" action="{{ url_for('show_collection_table',collection=collection) }}" method="get">
+		<div class="form-row align-items-center">
+			<!--div class="col-auto">
+				<label class="sr-only" for="email">Email</label>
+				<input type="email" class="form-control mb-2" id="email" name="email" placeholder="Correo">
+			</div-->
+			<div class="col-auto mb-2">
+				<label class="sr-only" for="passwd">Buscar</label>
+				<input type="text" class="form-control" name="search" placeholder="Buscar" required>
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-info mb-2">Buscar</button>
+			</div>
+		</div>
+	</form>
+	<div class="col-auto">
+		<a href="{{ url_for('create_entry',collection=collection) }}" class="btn btn-info mb-2">Crear entrada</a>
+	</div>
+</div>
+
+{% if no_results %}
+<h3 class="mt-5">¡Vaya!</h3>
+<p class="lead">Parece que no hay nada que mostrar.</p>
+{% else %}
+
+{% if not not_searching %}
+<h4 class="my-3">Resultados de la búsqueda: {{ search_value }}</h4>
+{% endif %}
+
+<!-- Tabla -->
+<table class="table mt-2">
+  <thead class="thead-light">
+    <tr>
+      <!--th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th-->
+			{% for header in data_headers %}
+			<th scope="col">{{ header }}</th>
+			{% endfor %}
+			<!-- Dos columnas extra: para los botones de editar y borrar -->
+			<th scope="col"> </th>
+			<th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+		{% for entry in data %}
+			<tr>
+				{% for key in entry %}
+					{% if key == '_id' %}
+					<th scope="row">{{ entry[key] }}</th>
+					{% else %}
+					<td>{{ entry[key] }}</td>
+					{% endif %}
+				{% endfor %}
+				<td>
+						<a href="{{ url_for('edit_entry',collection=collection,id=entry['_id']) }}" class="btn btn-secondary">Editar</a>
+				</td>
+				<td>
+						<a href="{{ url_for('confirm_deletion',collection=collection,id=entry['_id']) }}" class="btn btn-danger">Borrar</a>
+				</td>
+			</tr>
+		{% endfor %}
+    <!--tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr-->
+  </tbody>
+</table>
+
+<!-- Página -->
+<div class="row align-items-center ml-2">
+	{% if not is_first_page %}
+		{% if not_searching %}
+		<a href="{{ url_for('show_collection_table',collection=collection) }}?page={{ prev_page }}" class="btn btn-info mb-2 mr-2">Anterior</a>
+		{% else %}
+		<a href="{{ url_for('show_collection_table',collection=collection) }}?page={{ prev_page }}&search={{ search_value }}" class="btn btn-info mb-2 mr-2">Anterior</a>
+		{% endif %} <!-- not_searching -->
+	{% endif %}
+	Pág. {{page}}
+	{% if not is_last_page %}
+		{% if not_searching %}
+		<a href="{{ url_for('show_collection_table',collection=collection) }}?page={{ next_page }}" class="btn btn-info mb-2 ml-2">Siguiente</a>
+		{% else %}
+		<a href="{{ url_for('show_collection_table',collection=collection) }}?page={{ next_page }}&search={{ search_value }}" class="btn btn-info mb-2 ml-2">Siguiente</a>
+		{% endif %} <!-- not_searching -->
+	{% endif %}
+</div>
+
+{% endif %} <!-- No results -->
+
+{% endblock %}
