@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-3">Editar entrada</h3>
+
+<p>Editar los datos de la entrada con ID <span class="font-weight-bold">{{ data['_id'] }}</span> perteneciente a la colección <span class="font-weight-bold">{{ collection }}</span></p>
+
+<form class="" action="{{ url_for('update',collection=collection,id=data['_id'])}}" method="post">
+	{% for key in data %}
+	{% if key != '_id'%}
+	<div class="form-group">
+		<label for="{{ key }}">{{ key }}:</label>
+		<input type="text" value="{{ data[key] }}" class="form-control" name="{{ key }}">
+	</div>
+	{% endif %}
+	{% endfor %}
+	<div class="form-group">
+		<button type="submit" class="btn btn-info col-auto mr-3 ">Editar</button>
+		<a class="btn btn-secondary col-auto" href="{{ url_for('show_collection_table',collection=collection) }}">Volver</a>
+	</div>
+</form>
+
+{% endblock %}

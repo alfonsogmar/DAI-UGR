@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h1 class="mt-5">Perfil de {{ session.username }}</h1>
+	<div class="row ml-1 mt-5">
+		<div class="col-auto"> <!-- Email -->
+		{% if user_info.email %}
+		Correo electrónico: {{ user_info.email }}
+		{% else %}
+		Actualmente no tienes correo electrónico asociado.
+		{% endif %}
+		</div>
+		<div class="col-auto">
+		<a class="btn btn-info mb-2" href="{{ url_for('update_user_info',info_kind='email') }}">Editar correo</a>
+		</div>
+	</div>
+	<div class="row ml-1 mt-3">
+		<div class="col-auto"> <!-- Nombre completo -->
+		{% if user_info.fullname %}
+		Nombre completo: {{ user_info.fullname }}
+		{% else %}
+		Aún no has indicado cuál es tu nombre completo real.
+		{% endif %}
+		</div>
+		<div class="col-auto">
+		<a class="btn btn-info mb-2" href="{{ url_for('update_user_info',info_kind='fullname') }}">Editar nombre completo</a>
+		</div>
+	</div>
+ 	<!-- Fecha signup -->
+	<div class="row ml-1 mt-3">
+		<div class="col-auto">Fecha de registro: {{ user_info.signup_date }}</div>
+	</div>
+
+
+{% endblock %}

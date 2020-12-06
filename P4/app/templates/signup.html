@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h1 class="mt-5 mb-3">¡Regístrate!</h1>
+
+<form action="{{ url_for('signup_user') }}" method="post">
+  <div class="form-group">
+		<label class="sr-only" for="username">Nombre de usuario</label>
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text">@</div>
+			</div>
+			<input type="text" class="form-control" id="username" name="username" placeholder="Introduzca un nombre de usuario" required>
+		</div>  </div>
+  <div class="form-group">
+		<label class="sr-only" for="passwd">Password</label>
+		<input type="password" class="form-control"  name="passwd" placeholder="Introduzca una contraseña" required>
+    <small class="form-text text-muted">Cuanto más compleja sea tu contraseña, más segura será</small>
+  </div>
+	<div class="form-row ml-auto">
+  <button type="submit" class="btn btn-info col-auto mr-3 ">Registrarse</button>
+	<a class="btn btn-danger col-auto" href="{{ url_for('root') }}">Cancelar</a>
+	</div>
+</form>
+
+{% endblock %}

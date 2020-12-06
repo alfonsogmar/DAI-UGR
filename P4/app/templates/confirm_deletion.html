@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h4 class="mt-5">Confirmar borrado</h4>
+
+<p class="lead">¿Está seguro de que quiere eliminar el siguiente documento de la colección <span class="font-weight-bold">{{ collection }}</span>?</p>
+
+{% for key in entry %}
+<div class="row">
+	<div class="col-2 font-weight-bold">{{ key }}</div>
+	<div class="col-6 font-weight-normal">{{ entry[key] }}</div>
+</div>
+{% endfor %}
+
+<div class="row align-items-center mt-3">
+	<a href="{{ url_for('delete',collection=collection,id=entry['_id']) }}" class="btn btn-danger mb-2 ml-3">Borrar</a>
+	<a href="{{ url_for('show_collection_table',collection=collection) }}" class="btn btn-secondary mb-2 ml-3">Volver</a>
+</div>
+
+
+{% endblock %}
