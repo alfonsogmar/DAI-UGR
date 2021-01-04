@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+{% if not object_list %}
+<h3 class="mt-5">¡Vaya!</h3>
+<p class="lead">Parece que no hay libros que mostrar.</p>
+<a href="{% url 'create_book'%}" class="btn btn-info">Añadir libro</a>
+{% else %}
+<h3 class="mt-3">Libros registrados</h3>
+<div class="row mt-4">
+	<form class="col-auto" method="get">
+		<div class="form-row align-items-center">
+			<div class="col-auto mb-2">
+				<label class="sr-only" for="passwd">Buscar</label>
+				<input type="text" class="form-control" name="title" placeholder="Buscar" required>
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-info mb-2">Buscar</button>
+			</div>
+		</div>
+	</form>
+	<div class="col-auto">
+		<a href="{% url 'create_book'%}" class="btn btn-info mb-2">Añadir libro</a>
+	</div>
+</div>
+
+<!-- Tabla -->
+<table class="table mt-2 ">
+  <thead class="thead-light">
+    <tr>
+      <!--th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+			{% for field in fields %}
+			<th scope="col">{{ field }}</th>
+			{% endfor %}
+			-->
+			<th scope="col">#</th>
+			<th scope="col">Título</th>
+			<!--th scope="col">Fecha de nacimiento</th-->
+			<!-- Dos columnas extra: para los botones de editar y borrar -->
+			<th scope="col"> Acciones </th>
+    </tr>
+  </thead>
+  <tbody>
+		{% for book in object_list %}
+			<tr>
+				<th scope="row">{{ book.id }}</th>
+				<td>{{ book.titulo }}</td>
+				<td>
+						<a href="{% url 'book_details' pk=book.id %}" class="btn btn-info">Ver detalles</a>
+						<a href="{% url 'update_book' pk=book.id%}" class="btn btn-secondary">Editar</a>
+						<a href="{% url 'delete_book' pk=book.id%}" class="btn btn-danger">Borrar</a>
+				</td>
+			</tr>
+		{% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endif %} <!-- No results -->
+
+{% endblock %}

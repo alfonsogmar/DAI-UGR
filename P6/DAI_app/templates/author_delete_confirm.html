@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-4">Confirmar borrado del autor #{{ object.id }}</h3>
+
+<div class="row">
+	<div class="col-2 font-weight-bold">Nombre completo</div>
+	<div class="col-6 font-weight-normal">{{ object.nombre }}</div>
+</div>
+<div class="row">
+	<div class="col-2 font-weight-bold">Fecha de nacimiento</div>
+	<div class="col-6 font-weight-normal">{{ object.fecha_nacimiento }}</div>
+</div>
+
+<form method="post">{% csrf_token %}
+    <p>¿Está seguro de que desea eliminar a este autor?</p>
+		<div class="form-row align-items-center mt-3">
+    	<input class="btn btn-danger mr-3" type="submit" value="Confirmar">
+			<a href="{% url 'authors' %}" class="btn btn-secondary">Volver a Autores</a>
+		</div>
+</form>
+
+{% endblock %}
