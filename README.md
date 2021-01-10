@@ -10,3 +10,4 @@ Las prácticas no consisten en un único proyecto, sino que hay un directorio pa
 - Django (Python)
 - Bootstrap (CSS)
 - MongoDB
+- PostgreSQL
