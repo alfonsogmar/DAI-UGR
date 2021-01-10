@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-4">Confirmar borrado del préstamo</h3>
+
+<div class="row">
+	<div class="col-2 font-weight-bold">Nombre de ususario</div>
+	<div class="col-6 font-weight-normal">{{ object.usuario }}</div>
+</div>
+<div class="row">
+	<div class="col-2 font-weight-bold">Libro prestado</div>
+	<div class="col-6 font-weight-normal">{{ object.libro }}</div>
+</div>
+<div class="row">
+	<div class="col-2 font-weight-bold">Fecha del préstamo</div>
+	<div class="col-6 font-weight-normal">{{ object.fecha }}</div>
+</div>
+
+<form method="post">{% csrf_token %}
+    <p>¿Está seguro de que desea eliminar este préstamo?</p>
+		<div class="form-row align-items-center mt-3">
+    	<input class="btn btn-danger mr-3" type="submit" value="Confirmar">
+			<a href="{% url 'loans' %}" class="btn btn-secondary">Volver a préstamos</a>
+		</div>
+</form>
+
+{% endblock %}

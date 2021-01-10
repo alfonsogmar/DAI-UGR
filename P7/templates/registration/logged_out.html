@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+	<h1 class="mt-5">Sesión terminada</h1>
+  <p>Has cerrado sesión. ¡Hasta pronto!</p>
+  <a href="{% url 'login'%}">Haga click aquí si desea volver a iniciar sesión.</a>
+{% endblock %}

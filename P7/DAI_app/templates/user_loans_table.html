@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+{% if user.is_authenticated %}
+
+{% if not loans %}
+
+<h3 class="mt-5">¡Vaya!</h3>
+<p class="lead">Parece que no tienes préstamos.</p>
+<a href="{% url 'take_out_loan'%}" class="btn btn-info">Pedir libro</a>
+
+{% else %}
+
+<h3 class="mt-3">Préstamos de {{user}}</h3>
+<div class="row mt-4">
+	<div class="col-auto">
+		<a href="{% url 'take_out_loan'%}" class="btn btn-info mb-2">Pedir libro</a>
+	</div>
+</div>
+
+
+<!-- Tabla -->
+<table class="table mt-2 ">
+  <thead class="thead-light">
+    <tr>
+      <!--th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+			{% for field in fields %}
+			<th scope="col">{{ field }}</th>
+			{% endfor %}
+			-->
+			<th scope="col">#</th>
+			<th scope="col">Libro</th>
+			<th scope="col">Fecha</th>
+			<!--th scope="col">Fecha de nacimiento</th-->
+			<!-- Dos columnas extra: para los botones de editar y borrar -->
+			<th scope="col"> Acciones </th>
+    </tr>
+  </thead>
+  <tbody>
+		{% for loan in loans %}
+			<tr>
+				<th scope="row">{{ loan.id }}</th>
+				<td>{{ loan.libro.titulo }}</td>
+				<td>{{ loan.fecha }}</td>
+				<td>
+						<a href="{% url 'book_details' pk=loan.libro.id%}" class="btn btn-info">Ver libro</a>
+						<a href="{% url 'delete_loan' pk=loan.id%}" class="btn btn-danger">Borrar</a>
+				</td>
+			</tr>
+		{% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endif %} <!-- No results -->
+
+{% endif %} <!-- User is authenticated -->
+
+{% endblock %}

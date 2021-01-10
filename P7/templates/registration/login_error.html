@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h1 class="mt-5">Error al iniciar sesión</h1>
+<p>¡Vaya! Parece que no ha sido posible iniciar sesión.</p>
+<a href="{% url 'login'%}">Haga click aquí para volver a intentar iniciar sesión.</a>
+
+{% endblock %}

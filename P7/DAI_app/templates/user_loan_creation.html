@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+  <h1 class='mt-3'>Pedir préstamo</h1>
+	<h5 class="my-3">Seleccione un libro para pedirlo prestado.</h5>
+  <form action="{% url 'create_user_loan' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class='btn btn-info'>Pedir</button>
+  </form>
+
+
+{% endblock %}

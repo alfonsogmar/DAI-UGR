@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h3 class="mt-5 mb-4">Detalles del autor #{{ object.id }}</h3>
+
+<div class="row">
+	<div class="col-2 font-weight-bold">Nombre completo</div>
+	<div class="col-6 font-weight-normal">{{ object.nombre }}</div>
+</div>
+<div class="row">
+	<div class="col-2 font-weight-bold">Fecha de nacimiento</div>
+	<div class="col-6 font-weight-normal">{{ object.fecha_nacimiento }}</div>
+</div>
+
+<!-- Lista/tabla de libros del autor -->
+
+{% if books%}
+<h5 class="mt-5">Libros escritos por del autor</h5>
+
+<!-- Tabla -->
+<table class="table mt-2 ">
+  <thead class="thead-light">
+    <tr>
+      <!--th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+			{% for field in fields %}
+			<th scope="col">{{ field }}</th>
+			{% endfor %}
+			-->
+			<th scope="col">#</th>
+			<th scope="col">Título del libro</th>
+			<!--th scope="col">Fecha de nacimiento</th-->
+			<!-- Dos columnas extra: para los botones de editar y borrar -->
+			<th scope="col"><!--Acciones--></th>
+    </tr>
+  </thead>
+  <tbody>
+		{% for book in books%}
+			<tr>
+				<th scope="row">{{ book.id }}</th>
+				<td>{{ book.titulo }}</td>
+				<td>
+						<a href="{% url 'book_details' pk=book.id %}" class="btn btn-info">Ver detalles</a>
+						{% if user.is_authenticated and user.is_staff %}
+						<a href="{% url 'update_book' pk=book.id %}" class="btn btn-secondary">Editar</a>
+						<a href="{% url 'delete_book' pk=book.id %}" class="btn btn-danger">Borrar</a>
+						{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h5 class="mt-5">No se han encontrado libros de este autor</h5>
+{% endif %}
+
+
+
+{% endblock %}
